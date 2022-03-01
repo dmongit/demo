@@ -1,0 +1,37 @@
+service: dynamodb-demo
+
+plugins:
+    - serverless-prune-plugin
+    - serverless-dotenv-plugin
+
+provider:
+    name: aws
+    runtime: nodejs14.x
+    stage: ${opt:stage, 'dev'}
+    region: ${opt:region, 'us-west-2'}
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:DescribeTable
+          - dynamodb:Query
+          - dynamodb:Scan
+          - dynamodb:GetItem
+          - dynamodb:PutItem
+          - dynamodb:UpdateItem
+          - dynamodb:DeleteItem
+        Resource:
+          - "Fn::GetAtt": [ DemoDynamoDbTable, Arn ]
+
+functions:
+  gimmedata:
+    handler: data.handler
+    timeout: 7 
+    events:
+      - http:
+          path: ddb
+          method: GET
+          cors: true
+
+resources:
+  - ${file(resources/ddb.yml)}
+  

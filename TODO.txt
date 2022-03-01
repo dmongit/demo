@@ -1,0 +1,4 @@
+Need tests
+Need logging
+Need error handling
+Need code that works
