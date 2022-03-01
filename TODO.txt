@@ -1,4 +1,10 @@
-Need tests
-Need logging
-Need error handling
-Need code that works
+Modify UI (`feature-ui`) to accept filter params to return data in list/table
+ - Maybe amplify/cognito if time
+ - Add tests
+Modify serverless
+ - Add logging
+ - Add error handling
+ - Add events
+    - APIGW -> SNS -> SQS -> DDB Trigger -> Lambda
+    - Return data with websocket? that'd be fun
+    - OR... just respond with data from DDB without all of that mess (but, should showcase event driven goodies)
